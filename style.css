@@ -1,14 +1,7 @@
 * {
   box-sizing: border-box;
 }
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  justify-content: center;
-  padding: 20%;
-}
+
 .container1 {
   width: 100%;
   display: flex;
@@ -17,25 +10,54 @@
   justify-content: center;
 }
 
-@media (min-width: 992px) {
-  p {
-    width: 300px;
+@media (max-width: 992px) {
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    padding: 5%;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    height: 24rem;
+    width: 16rem;
+  }
+  .carte {
+    max-width: 4rem;
+    max-height: 4rem;
+    min-width: 4rem;
+    min-height: 4rem;
+    padding: 2px;
+  }
+}
+@media (min-width: 993px) {
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    height: 24rem;
+    width: 36rem;
+  }
+  .carte {
+    max-width: 6rem;
+    max-height: 6rem;
+    min-width: 6rem;
+    min-height: 6rem;
+    padding: 2px;
   }
 }
 
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  height: 36rem;
-  width: 24rem;
-}
-.carte {
-  max-width: 6rem;
-  max-height: 6rem;
-  min-width: 6rem;
-  min-height: 6rem;
-  padding: 2px;
-}
 /* .carte {
   max-width: 100px;
   max-height: 100px;
