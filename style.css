@@ -19,17 +19,24 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
-  height: 400px;
-  width: 600px;
+  height: 36rem;
+  width: 24rem;
 }
 .carte {
+  max-width: 6rem;
+  max-height: 6rem;
+  min-width: 6rem;
+  min-height: 6rem;
+  padding: 2px;
+}
+/* .carte {
   max-width: 100px;
   max-height: 100px;
   min-width: 100px;
   min-height: 100px;
   padding: 2px;
-  /* border: white 2px solid; */
-}
+  
+} */
 .schermatafinale {
   position: absolute;
   display: flex;
