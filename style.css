@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  padding: 100px;
+}
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  width: 600px;
+}
+.carte {
+  max-width: 100px;
+  max-height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  padding: 2px;
+  /* border: white 2px solid; */
+}
+.schermatafinale {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 50%;
+  font-weight: bold;
+  font-size: 3rem;
+}
+.bgred {
+  background-color: red;
+}
+.bggreen {
+  background-color: greenyellow;
+}
