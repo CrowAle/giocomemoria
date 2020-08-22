@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function startgame() {
     //do alla variabile gioco in corso il true
     start.textContent = "Re-Start";
-    start.style.backgroundColor = "orange";
+    start.style.backgroundColor = "yellow";
     giocoincorso = true;
     // resetto tutte le variabili
     cardArray.sort(() => 0.5 - Math.random());
