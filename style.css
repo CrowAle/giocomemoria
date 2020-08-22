@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-items: center;
   justify-content: center;
-  padding: 100px;
+  padding: 20%;
 }
 .container1 {
   width: 100%;
@@ -16,6 +16,13 @@
   justify-items: center;
   justify-content: center;
 }
+
+@media (min-width: 992px) {
+  p {
+    width: 300px;
+  }
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
