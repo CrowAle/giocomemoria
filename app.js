@@ -99,57 +99,104 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
-  cardArray.sort(() => 0.5 - Math.random());
+  //SETTO LE VARIABILI DEL GIOCO
   const container = document.querySelector("#container");
-  const grid = document.querySelector(".grid");
+  const grid = document.querySelector("#grid");
   const failed = document.querySelector("#failed");
   failed.textContent = 0;
   let tentativifalliti = 0;
-  let contorovescia = 90;
+  let contorovescia;
   let cardsChosen = [];
   let cardsChosenId = [];
   let winarray = [];
-  // creo il board
+  //CREO IL PRIMO BOARD ANCHE SE è FONDAMENTALMENTE UTILE SOLO PER MOSTRARE IL RETRO DELLE CARTE
+  createBoard();
+  // DICHIARO LE PRIME VARIABILI DI START
+  const start = document.querySelector("#start");
+  start.addEventListener("click", startgame);
+  let giocoincorso = false;
+  let counter;
+  //FUNZIONE CHE DA IL VIA AL GIOCO
+  function startgame() {
+    //do alla variabile gioco in corso il true
+    start.textContent = "Re-Start";
+    start.style.backgroundColor = "orange";
+    giocoincorso = true;
+    // resetto tutte le variabili
+    cardArray.sort(() => 0.5 - Math.random());
+    tentativifalliti = 0;
+    contorovescia = 90;
+    cardsChosen = [];
+    cardsChosenId = [];
+    winarray = [];
+    //ricreo il tavolo da gioco
+    createBoard();
 
-  var counter = setInterval(timer, 1000); //1000 will  run it every 1 second
-
-  function timer() {
-    contorovescia = contorovescia - 1;
-    if (contorovescia <= 0) {
+    //se e gia in corso un altro gioco resetto il timer
+    if (counter !== undefined) {
       clearInterval(counter);
-      document.getElementById("timer").innerHTML = 0 + " secs";
-
-      endGame("timeover", winarray.length - tentativifalliti);
-      return;
     }
-
-    document.getElementById("timer").innerHTML = contorovescia + " secs";
+    //creo il nuovo timer
+    counter = setInterval(timer, 1000);
+    function timer() {
+      contorovescia = contorovescia - 1;
+      // TEMPO SCADUTO
+      if (contorovescia <= 0) {
+        clearInterval(counter);
+        document.getElementById("timer").innerHTML = 0 + " secs";
+        endGame("timeover", winarray.length - tentativifalliti);
+        return;
+      }
+      // AGGIORNO IL DIPLAY DEI SECONDI MANCANTI
+      document.getElementById("timer").innerHTML = contorovescia + " secs";
+    }
   }
 
+  //FUNZIONE PER ELIMINARE IL DIV DI ESITO DEL GIOCO
+  function destroy() {
+    let a = document.getElementById("idschermatafinale");
+    a.remove();
+    document.body.removeEventListener("click", destroy);
+  }
+  //FUNZIONE CHE GESTISCE LA FINE DEL GIOCO O IN UN MODO O NELL ALTRO
   function endGame(esit, score) {
     let schermataFinale = document.createElement("div"); //schermatafinale
     schermataFinale.setAttribute("id", "idschermatafinale");
+    //schermataFinale.addEventListener("click", destroy);
+    document.body.addEventListener("click", destroy);
 
+    let testo1 = document.createElement("div"); //schermatafinale
+    testo1.setAttribute("id", "testo1");
+    testo1.classList.add("testo");
+    schermataFinale.appendChild(testo1);
+    let testo = document.createElement("div"); //schermatafinale
+    testo.setAttribute("id", "testo");
+    testo.classList.add("testo");
+    schermataFinale.appendChild(testo);
     if (esit === "timeover") {
       let newContent1 = document.createTextNode("Il Tempo e scaduto!");
-      schermataFinale.appendChild(newContent1);
-      schermataFinale.setAttribute("background-color", "#ff0000");
+      testo1.appendChild(newContent1);
+      //schermataFinale.setAttribute("background-color", "#ff0000");
       schermataFinale.classList.add("bgred");
     }
     if (esit === "win") {
       let newContent1 = document.createTextNode("Nice done!");
-      schermataFinale.appendChild(newContent1);
-      schermataFinale.setAttribute("background-color", "#00ff00");
+      testo1.appendChild(newContent1);
+      //schermataFinale.setAttribute("background-color", "#00ff00");
       schermataFinale.classList.add("bggreen");
+      clearInterval(counter);
     }
     let newContent = document.createTextNode("Il Tuo punteggio è =" + score);
-    schermataFinale.appendChild(newContent);
+    testo.appendChild(newContent);
     document.body.appendChild(schermataFinale);
     schermataFinale.classList.add("schermatafinale");
-    console.log(schermataFinale);
-    //grid.appendChild("schermataFinale");
+
+    giocoincorso = false;
+    start.textContent = "Start";
+    start.style.backgroundColor = "greenyellow";
   }
   function createBoard() {
+    grid.innerHTML = "";
     for (let i = 0; i < cardArray.length; i++) {
       let card = document.createElement("img");
       card.setAttribute("src", "carte/retro.jpg");
@@ -160,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("eseguita");
     }
   }
+  //QUESTA FUNZIONE DA UN LAMPO ROSSO IN CASO DI ERRORE E UN LAMPO VERDE IN CASO DI ACCOPPIAMENTO
   function bg(color) {
     document.body.style.backgroundColor = color;
     setTimeout(bianco, 2000);
@@ -167,6 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.style.backgroundColor = "white";
     }
   }
+  // GESTISCO IL MATCH
   function checkForMatch() {
     let cards = document.querySelectorAll("img");
     const optionOneId = cardsChosenId[0];
@@ -191,21 +240,22 @@ document.addEventListener("DOMContentLoaded", () => {
     cardsChosenId = [];
     cardsChosen = [];
   }
+  // FUNZIONE PER GIRARE LE CARTE
   function flipCard() {
     let a = this.src.split("/"); //splitto l immagine per permettere solo alle carte girate di essere selezionate
-    if (cardsChosen.length < 2 && a[a.length - 1] === "retro.jpg") {
+    if (
+      cardsChosen.length < 2 &&
+      a[a.length - 1] === "retro.jpg" &&
+      giocoincorso
+    ) {
       let cardId = this.getAttribute("data-id");
       this.setAttribute("src", cardArray[cardId].img);
       cardsChosen.push(cardArray[cardId].name);
       cardsChosenId.push(cardId);
-      console.log(cardId);
 
-      console.log(cardId);
-      //console.log(this);
       if (cardsChosen.length === 2) {
         setTimeout(checkForMatch, 300);
       }
     }
   }
-  createBoard();
 });
