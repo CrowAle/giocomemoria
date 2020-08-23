@@ -125,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // resetto tutte le variabili
     cardArray.sort(() => 0.5 - Math.random());
     tentativifalliti = 0;
+    failed.textContent = tentativifalliti;
     contorovescia = 90;
     cardsChosen = [];
     cardsChosenId = [];
@@ -174,19 +175,19 @@ document.addEventListener("DOMContentLoaded", () => {
     testo.classList.add("testo");
     schermataFinale.appendChild(testo);
     if (esit === "timeover") {
-      let newContent1 = document.createTextNode("Il Tempo e scaduto!");
+      let newContent1 = document.createTextNode(" Time Over ! ");
       testo1.appendChild(newContent1);
       //schermataFinale.setAttribute("background-color", "#ff0000");
       schermataFinale.classList.add("bgred");
     }
     if (esit === "win") {
-      let newContent1 = document.createTextNode("Nice done!");
+      let newContent1 = document.createTextNode(" Nice done !");
       testo1.appendChild(newContent1);
       //schermataFinale.setAttribute("background-color", "#00ff00");
       schermataFinale.classList.add("bggreen");
       clearInterval(counter);
     }
-    let newContent = document.createTextNode("Il Tuo punteggio è =" + score);
+    let newContent = document.createTextNode("Your score is = " + score);
     testo.appendChild(newContent);
     document.body.appendChild(schermataFinale);
     schermataFinale.classList.add("schermatafinale");
@@ -221,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const optionOneId = cardsChosenId[0];
     const optionTwoId = cardsChosenId[1];
     if (cardsChosen[0] === cardsChosen[1]) {
-      console.log("id", cardsChosenId[0]);
       cards[optionOneId].setAttribute("src", "carte/matched.png");
       cards[optionTwoId].setAttribute("src", "carte/matched.png");
       winarray.push(optionOneId);
