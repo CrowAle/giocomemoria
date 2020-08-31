@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardArray.sort(() => 0.5 - Math.random());
     tentativifalliti = 0;
     failed.textContent = tentativifalliti;
-    contorovescia = 90;
+    contorovescia = 1;
     cardsChosen = [];
     cardsChosenId = [];
     winarray = [];
@@ -187,9 +187,14 @@ document.addEventListener("DOMContentLoaded", () => {
       schermataFinale.classList.add("bggreen");
       clearInterval(counter);
     }
+
     let newContent = document.createTextNode("Your score is = " + score);
     testo.appendChild(newContent);
     document.body.appendChild(schermataFinale);
+    //+++++++++++++++++
+    inseriscipunteggio(score);
+    visualizzapunteggio(scoreboard);
+    //+++++++++++
     schermataFinale.classList.add("schermatafinale");
 
     giocoincorso = false;
@@ -257,5 +262,76 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(checkForMatch, 300);
       }
     }
+  }
+  //    ************************************************** */
+  let nome = "";
+  let scoreboard = [
+    { nome: "Alessio", punteggio: 20 },
+    { nome: "Alessio", punteggio: 7 },
+    { nome: "Mamma", punteggio: 40 },
+  ];
+
+  function inseriscipunteggio(punteggio) {
+    if (nome === "") {
+      nome = prompt("Come ti chiami");
+    }
+    let nuovopunteggio = { nome, punteggio };
+    scoreboard.push(nuovopunteggio);
+  }
+
+  function visualizzapunteggio(arraypunteggio) {
+    attacca(
+      "idpunteggio",
+      "idschermatafinale",
+      ["punteggio", "titolo"],
+      "Punteggi:",
+      ""
+    );
+    if (arraypunteggio.length > 0) {
+      arraypunteggio.sort(compare);
+      console.log(arraypunteggio);
+      arraypunteggio.map((
+        item,
+        index /* testopunteggio =
+            testopunteggio + item.nome + "   " + item.punteggio + `\br` */
+      ) =>
+        attacca(
+          "idpunteggio" + index,
+          "idpunteggio",
+          ["btn", "btnrosso"],
+          item.nome + "  =>  " + item.punteggio,
+          ""
+        )
+      );
+    }
+  }
+  //FUNZIONE CHE CI PERMETTE DI ATTACCARE UN DIV AD UN ALTRO
+  function attacca(idDaAttaccare, idDestinazione, css, testo, suclick) {
+    let divDaAttaccare = document.createElement("div");
+    css.map((item, index) => divDaAttaccare.classList.add(item));
+    divDaAttaccare.setAttribute("id", idDaAttaccare);
+    if (suclick) {
+      divDaAttaccare.setAttribute("onClick", suclick);
+    }
+    let boxacuiattaccare = document.getElementById(idDestinazione);
+    boxacuiattaccare.appendChild(divDaAttaccare);
+    let divDaAttaccareI = document.getElementById(idDaAttaccare);
+    divDaAttaccareI.innerHTML += testo;
+    //divDaAttaccareI.onclick = suclick;
+  }
+
+  // FUNZIONE CHE CI PERMETTE DI ORDINARE UN ARRAY DI OGGETTI DAL PIU GRANDE AL PIU PICCOLO SE SI VUOLE L ORDINE CONTRARIO INVERTIRE I SEGNI
+  function compare(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const scoreA = a.punteggio;
+    const scoreB = b.punteggio;
+
+    let comparison = 0;
+    if (scoreA < scoreB) {
+      comparison = 1;
+    } else if (scoreA > scoreB) {
+      comparison = -1;
+    }
+    return comparison;
   }
 });

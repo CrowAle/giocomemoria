@@ -78,11 +78,12 @@
   display: flex;
   justify-items: center;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   top: 25%;
   left: 25%;
   width: 50%;
-  height: 50%;
+  /* height: 50%; */
   opacity: 95%;
   font-weight: bold;
   font-size: 2rem;
@@ -92,7 +93,7 @@
   text-align: center;
   align-content: center;
   width: 100%;
-  padding: 5%;
+  padding: 2%;
   opacity: 100%;
   color: black;
 }
@@ -109,4 +110,16 @@
   font-weight: bold;
   margin: 2px;
   cursor: pointer;
+}
+.punteggio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 242, 170);
+  padding: 1rem;
+  width: 60%;
+}
+.titolo {
+  margin-bottom: 4rem;
 }
