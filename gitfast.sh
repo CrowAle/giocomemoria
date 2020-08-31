@@ -1,5 +1,5 @@
 
 git add .
 git commit -m "commitMessage"
-git push origin master
+git push origin nuovo
 read
