@@ -39,6 +39,33 @@
     min-height: 4rem;
     padding: 2px;
   }
+  .schermatafinale {
+    position: absolute;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    /* height: 50%; */
+    opacity: 95%;
+    font-weight: bold;
+    font-size: 2rem;
+    border: solid 1px black;
+  }
+  .testo {
+    text-align: center;
+    align-content: center;
+    width: 100%;
+    padding: 2%;
+    opacity: 100%;
+    color: black;
+  }
+  .classifica {
+    font-size: 90%;
+  }
 }
 @media (min-width: 993px) {
   .container {
@@ -63,6 +90,30 @@
     min-height: 6rem;
     padding: 2px;
   }
+  .schermatafinale {
+    position: absolute;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    /* height: 50%; */
+    opacity: 95%;
+    font-weight: bold;
+    font-size: 2rem;
+    border: solid 1px black;
+  }
+  .testo {
+    text-align: center;
+    align-content: center;
+    width: 100%;
+    padding: 2%;
+    opacity: 100%;
+    color: black;
+  }
 }
 
 /* .carte {
@@ -73,30 +124,7 @@
   padding: 2px;
   
 } */
-.schermatafinale {
-  position: absolute;
-  display: flex;
-  justify-items: center;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  /* height: 50%; */
-  opacity: 95%;
-  font-weight: bold;
-  font-size: 2rem;
-  border: solid 1px black;
-}
-.testo {
-  text-align: center;
-  align-content: center;
-  width: 100%;
-  padding: 2%;
-  opacity: 100%;
-  color: black;
-}
+
 .bgred {
   background-color: #f99;
 }
@@ -116,10 +144,31 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 242, 170);
+  background-color: rgb(255, 255, 255);
   padding: 1rem;
-  width: 60%;
+  width: 80%;
 }
 .titolo {
   margin-bottom: 4rem;
+}
+.boxbordato {
+  margin-top: 2rem;
+  width: 100%;
+  border: solid 0.1rem #888888;
+}
+/* tabelle */
+.tra {
+  width: 100%;
+}
+.tda {
+  width: 50%;
+}
+#idtable {
+  width: 100%;
+  text-align: center;
+  opacity: 200%;
+}
+
+#idtable tr:nth-child(odd) {
+  background: rgb(194, 194, 194);
 }

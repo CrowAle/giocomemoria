@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardArray.sort(() => 0.5 - Math.random());
     tentativifalliti = 0;
     failed.textContent = tentativifalliti;
-    contorovescia = 100;
+    contorovescia = 1;
     cardsChosen = [];
     cardsChosenId = [];
     winarray = [];
@@ -287,6 +287,56 @@ document.addEventListener("DOMContentLoaded", () => {
       "Punteggi:",
       ""
     );
+    attacca(
+      "boxpunteggio",
+      "idpunteggio",
+      ["classifica", "boxbordato"],
+      "<table id='idtable'></table>",
+      ""
+    );
+
+    if (arraypunteggio.length > 0) {
+      arraypunteggio.sort(compare);
+      console.log(arraypunteggio);
+      arraypunteggio.map(
+        (item, index) => (
+          attaccaX("idriga" + index, "idtable", ["tra"], "", "", "tr"),
+          attaccaX(
+            "idnome" + index,
+            "idriga" + index,
+            ["tda", "classifica"],
+            item.nome,
+            "",
+            "td"
+          ),
+          attaccaX(
+            "idpunteggio" + index,
+            "idriga" + index,
+            ["tda", "classifica"],
+            item.punteggio,
+            "",
+            "td"
+          )
+        )
+      );
+    }
+  }
+  /*   function visualizzapunteggio(arraypunteggio) {
+    attacca(
+      "idpunteggio",
+      "idschermatafinale",
+      ["punteggio", "titolo"],
+      "Punteggi:",
+      ""
+    );
+    attacca(
+      "boxpunteggio",
+      "idpunteggio",
+      ["classifica", "boxbordato"],
+      "<table></table>",
+      ""
+    );
+
     if (arraypunteggio.length > 0) {
       arraypunteggio.sort(compare);
       console.log(arraypunteggio);
@@ -294,20 +344,34 @@ document.addEventListener("DOMContentLoaded", () => {
         item,
         index /* testopunteggio =
             testopunteggio + item.nome + "   " + item.punteggio + `\br` */
-      ) =>
+  /*    ) =>
         attacca(
           "idpunteggio" + index,
-          "idpunteggio",
-          ["btn", "btnrosso"],
+          "boxpunteggio",
+          ["btn", "classifica"],
           item.nome + "  =>  " + item.punteggio,
           ""
         )
       );
     }
-  }
+  } */
+
   //FUNZIONE CHE CI PERMETTE DI ATTACCARE UN DIV AD UN ALTRO
   function attacca(idDaAttaccare, idDestinazione, css, testo, suclick) {
     let divDaAttaccare = document.createElement("div");
+    css.map((item, index) => divDaAttaccare.classList.add(item));
+    divDaAttaccare.setAttribute("id", idDaAttaccare);
+    if (suclick) {
+      divDaAttaccare.setAttribute("onClick", suclick);
+    }
+    let boxacuiattaccare = document.getElementById(idDestinazione);
+    boxacuiattaccare.appendChild(divDaAttaccare);
+    let divDaAttaccareI = document.getElementById(idDaAttaccare);
+    divDaAttaccareI.innerHTML += testo;
+    //divDaAttaccareI.onclick = suclick;
+  }
+  function attaccaX(idDaAttaccare, idDestinazione, css, testo, suclick, tipo) {
+    let divDaAttaccare = document.createElement(tipo);
     css.map((item, index) => divDaAttaccare.classList.add(item));
     divDaAttaccare.setAttribute("id", idDaAttaccare);
     if (suclick) {
