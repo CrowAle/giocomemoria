@@ -368,8 +368,8 @@ document.addEventListener("DOMContentLoaded", () => {
     boxacuiattaccare.appendChild(divDaAttaccare);
     let divDaAttaccareI = document.getElementById(idDaAttaccare);
     divDaAttaccareI.innerHTML += testo;
-    //divDaAttaccareI.onclick = suclick;
   }
+  //permette di attaccare elementi diversi dai div
   function attaccaX(idDaAttaccare, idDestinazione, css, testo, suclick, tipo) {
     let divDaAttaccare = document.createElement(tipo);
     css.map((item, index) => divDaAttaccare.classList.add(item));
@@ -381,7 +381,6 @@ document.addEventListener("DOMContentLoaded", () => {
     boxacuiattaccare.appendChild(divDaAttaccare);
     let divDaAttaccareI = document.getElementById(idDaAttaccare);
     divDaAttaccareI.innerHTML += testo;
-    //divDaAttaccareI.onclick = suclick;
   }
 
   // FUNZIONE CHE CI PERMETTE DI ORDINARE UN ARRAY DI OGGETTI DAL PIU GRANDE AL PIU PICCOLO SE SI VUOLE L ORDINE CONTRARIO INVERTIRE I SEGNI
