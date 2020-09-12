@@ -22,6 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "angelo", img: percorsocarte + "angelo.png" },
     { name: "man", img: percorsocarte + "man.png" },
     { name: "tea", img: percorsocarte + "tea.jpg" },
+    { name: "fioreverde", img: percorsocarte + "fioreverde.png" },
+    { name: "lente", img: percorsocarte + "lente.png" },
+    { name: "dollaro", img: percorsocarte + "dollaro.png" },
+    { name: "robot", img: percorsocarte + "robot.png" },
+    { name: "nota", img: percorsocarte + "nota.jpg" },
+    { name: "carrello", img: percorsocarte + "carrello.png" },
   ];
   let cardArray = [];
   function costruisciarray() {
