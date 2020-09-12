@@ -1,6 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const percorsocarte = "carte/";
+  const imgArray = [
+    { name: "occhio", img: percorsocarte + "occhio.jpg" },
+    { name: "atomo", img: percorsocarte + "atom.png" },
+    { name: "missile", img: percorsocarte + "rocket.png" },
+    { name: "lampadina", img: percorsocarte + "lampadina.png" },
+    { name: "faro", img: percorsocarte + "faro.jpg" },
+    { name: "furgoncino", img: percorsocarte + "furgoncino.png" },
+    { name: "fiore", img: percorsocarte + "fiore.jpg" },
+    { name: "funkman", img: percorsocarte + "funkman.jpg" },
+    { name: "mela", img: percorsocarte + "mela.jpg" },
+    { name: "southlady", img: percorsocarte + "southlady.jpg" },
+    { name: "cervello", img: percorsocarte + "cervello.png" },
+    { name: "mask", img: percorsocarte + "mask.png" },
+    { name: "casa", img: percorsocarte + "casa.png" },
+    { name: "chiave", img: percorsocarte + "chiave.png" },
+    { name: "mario", img: percorsocarte + "mario.png" },
+    { name: "asino", img: percorsocarte + "asino.png" },
+    { name: "kitty", img: percorsocarte + "kitty.png" },
+    { name: "x", img: percorsocarte + "x.png" },
+    { name: "angelo", img: percorsocarte + "angelo.png" },
+    { name: "man", img: percorsocarte + "man.png" },
+    { name: "tea", img: percorsocarte + "tea.jpg" },
+  ];
+  let cardArray = [];
+  function costruisciarray() {
+    cardArray = [];
+    imgArray.sort(() => 0.5 - Math.random());
+    for (let index = 0; index < 12; index++) {
+      cardArray.push(imgArray[index]);
+      cardArray.push(imgArray[index]);
+    }
+    /*  imgArray.forEach((element) => {
+      cardArray.push(element);
+      cardArray.push(element);
+    }); */
+  }
   //card options
-  const cardArray = [
+  const cardArraya = [
     {
       name: "occhio",
       img: "carte/occhio.jpg",
@@ -110,12 +147,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let cardsChosenId = [];
   let winarray = [];
   //CREO IL PRIMO BOARD ANCHE SE è FONDAMENTALMENTE UTILE SOLO PER MOSTRARE IL RETRO DELLE CARTE
+  costruisciarray();
   createBoard();
   // DICHIARO LE PRIME VARIABILI DI START
   const start = document.querySelector("#start");
   start.addEventListener("click", startgame);
   let giocoincorso = false;
   let counter;
+
   //FUNZIONE CHE DA IL VIA AL GIOCO
   function startgame() {
     //do alla variabile gioco in corso il true
@@ -123,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
     start.style.backgroundColor = "yellow";
     giocoincorso = true;
     // resetto tutte le variabili
+    costruisciarray();
     cardArray.sort(() => 0.5 - Math.random());
     tentativifalliti = 0;
     failed.textContent = tentativifalliti;
@@ -202,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     start.style.backgroundColor = "greenyellow";
   }
   function createBoard() {
+    // costruisciarray();
     grid.innerHTML = "";
     for (let i = 0; i < cardArray.length; i++) {
       let card = document.createElement("img");
