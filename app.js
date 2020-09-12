@@ -21,13 +21,22 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "x", img: percorsocarte + "x.png" },
     { name: "angelo", img: percorsocarte + "angelo.png" },
     { name: "man", img: percorsocarte + "man.png" },
-    { name: "tea", img: percorsocarte + "tea.jpg" },
     { name: "fioreverde", img: percorsocarte + "fioreverde.png" },
     { name: "lente", img: percorsocarte + "lente.png" },
     { name: "dollaro", img: percorsocarte + "dollaro.png" },
     { name: "robot", img: percorsocarte + "robot.png" },
     { name: "nota", img: percorsocarte + "nota.jpg" },
     { name: "carrello", img: percorsocarte + "carrello.png" },
+    { name: "doraemon", img: percorsocarte + "doraemon.jpg" },
+    { name: "anguria", img: percorsocarte + "anguria.jpg" },
+    { name: "blackcat", img: percorsocarte + "blackcat.png" },
+    { name: "free", img: percorsocarte + "free.png" },
+    { name: "merdina", img: percorsocarte + "merdina.jpg" },
+    { name: "smile", img: percorsocarte + "smile.jpg" },
+    { name: "sole", img: percorsocarte + "sole.jpg" },
+    { name: "stella", img: percorsocarte + "stella.jpg" },
+
+    { name: "wifi", img: percorsocarte + "wifi.png" },
   ];
   let cardArray = [];
   function costruisciarray() {
@@ -42,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cardArray.push(element);
     }); */
   }
-  //card options
+  //card options l ho temporaneamente sospeso lo costruisco dinamicamente e a questo ho aggiunto una a al nome
   const cardArraya = [
     {
       name: "occhio",
@@ -378,40 +387,6 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
   }
-  /*   function visualizzapunteggio(arraypunteggio) {
-    attacca(
-      "idpunteggio",
-      "idschermatafinale",
-      ["punteggio", "titolo"],
-      "Punteggi:",
-      ""
-    );
-    attacca(
-      "boxpunteggio",
-      "idpunteggio",
-      ["classifica", "boxbordato"],
-      "<table></table>",
-      ""
-    );
-
-    if (arraypunteggio.length > 0) {
-      arraypunteggio.sort(compare);
-      console.log(arraypunteggio);
-      arraypunteggio.map((
-        item,
-        index /* testopunteggio =
-            testopunteggio + item.nome + "   " + item.punteggio + `\br` */
-  /*    ) =>
-        attacca(
-          "idpunteggio" + index,
-          "boxpunteggio",
-          ["btn", "classifica"],
-          item.nome + "  =>  " + item.punteggio,
-          ""
-        )
-      );
-    }
-  } */
 
   //FUNZIONE CHE CI PERMETTE DI ATTACCARE UN DIV AD UN ALTRO
   function attacca(idDaAttaccare, idDestinazione, css, testo, suclick) {

@@ -8,7 +8,8 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 function azzerapunteggi() {
-  setCookie("coockiememoria", "", 7);
+  let azzera = confirm("Vuoi Veramente azzerare i punteggi?");
+  azzera && setCookie("coockiememoria", "", 7);
 }
 function aggiungipunteggiocoockie(utente, punteggio) {
   nuovo = utente + ":" + punteggio + ",";
