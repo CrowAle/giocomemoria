@@ -172,3 +172,21 @@
 #idtable tr:nth-child(odd) {
   background: rgb(194, 194, 194);
 }
+
+/*BOTTONI*/
+.btn {
+  padding: 0.2rem;
+  width: fit-content;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 0.4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.btnazzera {
+  background-color: rgb(255, 145, 0);
+}

@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardArray.sort(() => 0.5 - Math.random());
     tentativifalliti = 0;
     failed.textContent = tentativifalliti;
-    contorovescia = 100;
+    contorovescia = 1;
     cardsChosen = [];
     cardsChosenId = [];
     winarray = [];
@@ -275,8 +275,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (nome === "") {
       nome = prompt("Come ti chiami");
     }
-    let nuovopunteggio = { nome, punteggio };
-    scoreboard.push(nuovopunteggio);
+    // queste due righe davano la possibilita di aggiungere i punteggi a var temporanea quelle dopo settano un coockie
+    //let nuovopunteggio = { nome, punteggio };
+    //scoreboard.push(nuovopunteggio);
+    aggiungipunteggiocoockie(nome, punteggio);
+    scoreboard = getCookie("coockiememoria");
   }
 
   function visualizzapunteggio(arraypunteggio) {
@@ -294,7 +297,14 @@ document.addEventListener("DOMContentLoaded", () => {
       "<table id='idtable'></table>",
       ""
     );
-
+    attacca("divazzera", "idschermatafinale", ["punteggio", "titolo"], "", "");
+    attacca(
+      "idazzera",
+      "divazzera",
+      ["btn", "btnazzera"],
+      "Azzera Punteggi!",
+      "azzerapunteggi()"
+    );
     if (arraypunteggio.length > 0) {
       arraypunteggio.sort(compare);
       console.log(arraypunteggio);
