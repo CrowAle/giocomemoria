@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const percorsocarte = "carte/";
   const imgArray = [
-    { name: "occhio", img: percorsocarte + "occhio.jpg" },
+    /*    { name: "occhio", img: percorsocarte + "occhio.jpg" },
     { name: "atomo", img: percorsocarte + "atom.png" },
     { name: "missile", img: percorsocarte + "rocket.png" },
     { name: "lampadina", img: percorsocarte + "lampadina.png" },
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "man", img: percorsocarte + "man.png" },
     { name: "fioreverde", img: percorsocarte + "fioreverde.png" },
     { name: "lente", img: percorsocarte + "lente.png" },
-    { name: "dollaro", img: percorsocarte + "dollaro.png" },
+    { name: "dollaro", img: percorsocarte + "dollaro.png" }, */
     { name: "robot", img: percorsocarte + "robot.png" },
     { name: "nota", img: percorsocarte + "nota.jpg" },
     { name: "carrello", img: percorsocarte + "carrello.png" },
