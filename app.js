@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const percorsocarte = "carte/";
   const imgArray = [
-    /*    { name: "occhio", img: percorsocarte + "occhio.jpg" },
+    { name: "occhio", img: percorsocarte + "occhio.jpg" },
     { name: "atomo", img: percorsocarte + "atom.png" },
     { name: "missile", img: percorsocarte + "rocket.png" },
     { name: "lampadina", img: percorsocarte + "lampadina.png" },
@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "casa", img: percorsocarte + "casa.png" },
     { name: "chiave", img: percorsocarte + "chiave.png" },
     { name: "mario", img: percorsocarte + "mario.png" },
-    { name: "asino", img: percorsocarte + "asino.png" },
+    /*  { name: "asino", img: percorsocarte + "asino.png" },
     { name: "kitty", img: percorsocarte + "kitty.png" },
     { name: "x", img: percorsocarte + "x.png" },
     { name: "angelo", img: percorsocarte + "angelo.png" },
     { name: "man", img: percorsocarte + "man.png" },
     { name: "fioreverde", img: percorsocarte + "fioreverde.png" },
     { name: "lente", img: percorsocarte + "lente.png" },
-    { name: "dollaro", img: percorsocarte + "dollaro.png" }, */
+    { name: "dollaro", img: percorsocarte + "dollaro.png" },
     { name: "robot", img: percorsocarte + "robot.png" },
     { name: "nota", img: percorsocarte + "nota.jpg" },
     { name: "carrello", img: percorsocarte + "carrello.png" },
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "sole", img: percorsocarte + "sole.jpg" },
     { name: "stella", img: percorsocarte + "stella.jpg" },
 
-    { name: "wifi", img: percorsocarte + "wifi.png" },
+    { name: "wifi", img: percorsocarte + "wifi.png" }, */
   ];
   let cardArray = [];
   function costruisciarray() {
