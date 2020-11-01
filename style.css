@@ -97,7 +97,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    top: 25%;
+    top: 0%;
     left: 25%;
     width: 50%;
     /* height: 50%; */
@@ -131,6 +131,9 @@
 .bggreen {
   background-color: #afa;
 }
+.bgyellow {
+  background-color: rgb(238, 255, 0);
+}
 .start {
   background-color: greenyellow;
   text-align: center;
@@ -150,6 +153,9 @@
 }
 .titolo {
   margin-bottom: 4rem;
+}
+.top {
+  margin-top: 2rem;
 }
 .boxbordato {
   margin-top: 2rem;
@@ -189,4 +195,7 @@
 }
 .btnazzera {
   background-color: rgb(255, 145, 0);
+}
+.btngenerale {
+  background-color: rgb(238, 255, 0);
 }

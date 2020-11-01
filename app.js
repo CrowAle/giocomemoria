@@ -1,3 +1,125 @@
+// FUNZIONE CHE CI PERMETTE DI ORDINARE UN ARRAY DI OGGETTI DAL PIU GRANDE AL PIU PICCOLO SE SI VUOLE L ORDINE CONTRARIO INVERTIRE I SEGNI
+function compare(a, b) {
+  // Use toUpperCase() to ignore character casing
+  const scoreA = a.punteggio;
+  const scoreB = b.punteggio;
+
+  let comparison = 0;
+  if (scoreA < scoreB) {
+    comparison = 1;
+  } else if (scoreA > scoreB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+//FUNZIONE CHE CI PERMETTE DI ATTACCARE UN DIV AD UN ALTRO
+function attacca(idDaAttaccare, idDestinazione, css, testo, suclick) {
+  let divDaAttaccare = document.createElement("div");
+  css.map((item, index) => divDaAttaccare.classList.add(item));
+  divDaAttaccare.setAttribute("id", idDaAttaccare);
+  if (suclick) {
+    divDaAttaccare.setAttribute("onClick", suclick);
+  }
+  let boxacuiattaccare = document.getElementById(idDestinazione);
+  boxacuiattaccare.appendChild(divDaAttaccare);
+  let divDaAttaccareI = document.getElementById(idDaAttaccare);
+  divDaAttaccareI.innerHTML += testo;
+}
+//permette di attaccare elementi diversi dai div
+function attaccaX(idDaAttaccare, idDestinazione, css, testo, suclick, tipo) {
+  let divDaAttaccare = document.createElement(tipo);
+  css.map((item, index) => divDaAttaccare.classList.add(item));
+  divDaAttaccare.setAttribute("id", idDaAttaccare);
+  if (suclick) {
+    divDaAttaccare.setAttribute("onClick", suclick);
+  }
+  let boxacuiattaccare = document.getElementById(idDestinazione);
+  boxacuiattaccare.appendChild(divDaAttaccare);
+  let divDaAttaccareI = document.getElementById(idDaAttaccare);
+  divDaAttaccareI.innerHTML += testo;
+}
+async function get_class_assoluta() {
+  var request = createCORSRequest(
+    "get",
+    "https://memogame.altervista.org/servermemogame/server.php?mode=listaclassifica"
+  );
+  if (request) {
+    var punteggio = [];
+    // Define a callback function
+    request.onload = function () {};
+    // Send request
+    request.send();
+    request.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        punteggio = JSON.parse(request.responseText);
+        console.log("qui", JSON.stringify(punteggio));
+        visualizzapunteggiogenerale(punteggio);
+        //console.log("qui", JSON.stringify(punteggio));
+      }
+    };
+  }
+}
+async function classificag() {
+  get_class_assoluta();
+}
+//FUNZIONE PER ELIMINARE IL DIV DI ESITO DEL GIOCO
+function destroy() {
+  let a = document.getElementById("idschermatafinale");
+  a.remove();
+  document.body.removeEventListener("click", destroy);
+}
+
+function visualizzapunteggiogenerale(arraypunteggio) {
+  let schermataFinale = document.createElement("div"); //schermatafinale
+  schermataFinale.setAttribute("id", "idschermatafinale");
+  document.body.appendChild(schermataFinale);
+  schermataFinale.classList.add("schermatafinale");
+  schermataFinale.classList.add("bgyellow");
+  document.body.addEventListener("click", destroy);
+  // document.body.addEventListener("click", destroy);
+
+  attacca(
+    "idpunteggio",
+    "idschermatafinale",
+    ["punteggio", "top", "titolo"],
+    "Classifica assoluta:",
+    ""
+  );
+  attacca(
+    "boxpunteggio",
+    "idpunteggio",
+    ["classifica", "boxbordato"],
+    "<table id='idtable'></table>",
+    ""
+  );
+  attacca("divazzera", "idschermatafinale", ["punteggio", "titolo"], "", "");
+
+  if (arraypunteggio.length > 0) {
+    arraypunteggio.sort(compare);
+    console.log(arraypunteggio);
+    arraypunteggio.map(
+      (item, index) => (
+        attaccaX("idriga" + index, "idtable", ["tra"], "", "", "tr"),
+        attaccaX(
+          "idnome" + index,
+          "idriga" + index,
+          ["tda", "classifica"],
+          item.nome,
+          "",
+          "td"
+        ),
+        attaccaX(
+          "idpunteggio" + index,
+          "idriga" + index,
+          ["tda", "classifica"],
+          item.punteggio,
+          "",
+          "td"
+        )
+      )
+    );
+  }
+}
 document.addEventListener("DOMContentLoaded", () => {
   const percorsocarte = "carte/";
   const imgArray = [
@@ -181,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardArray.sort(() => 0.5 - Math.random());
     tentativifalliti = 0;
     failed.textContent = tentativifalliti;
-    contorovescia = 100;
+    contorovescia = 1;
     cardsChosen = [];
     cardsChosenId = [];
     winarray = [];
@@ -208,12 +330,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  //FUNZIONE PER ELIMINARE IL DIV DI ESITO DEL GIOCO
-  function destroy() {
-    let a = document.getElementById("idschermatafinale");
-    a.remove();
-    document.body.removeEventListener("click", destroy);
-  }
   //FUNZIONE CHE GESTISCE LA FINE DEL GIOCO O IN UN MODO O NELL ALTRO
   function endGame(esit, score) {
     let schermataFinale = document.createElement("div"); //schermatafinale
@@ -246,6 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let newContent = document.createTextNode("Your score is = " + score);
     testo.appendChild(newContent);
     document.body.appendChild(schermataFinale);
+
     //+++++++++++++++++
     inseriscipunteggio(score);
     visualizzapunteggio(scoreboard);
@@ -335,6 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //let nuovopunteggio = { nome, punteggio };
     //scoreboard.push(nuovopunteggio);
     aggiungipunteggiocoockie(nome, punteggio);
+    inviapunteggiodb(nome, punteggio);
     scoreboard = getCookie("coockiememoria");
   }
 
@@ -361,6 +479,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "Azzera Punteggi!",
       "azzerapunteggi()"
     );
+    attacca(
+      "idclassifica",
+      "divazzera",
+      ["btn", "btngenerale"],
+      "Classifica Generale!",
+      "classificag()"
+    );
     if (arraypunteggio.length > 0) {
       arraypunteggio.sort(compare);
       console.log(arraypunteggio);
@@ -386,47 +511,5 @@ document.addEventListener("DOMContentLoaded", () => {
         )
       );
     }
-  }
-
-  //FUNZIONE CHE CI PERMETTE DI ATTACCARE UN DIV AD UN ALTRO
-  function attacca(idDaAttaccare, idDestinazione, css, testo, suclick) {
-    let divDaAttaccare = document.createElement("div");
-    css.map((item, index) => divDaAttaccare.classList.add(item));
-    divDaAttaccare.setAttribute("id", idDaAttaccare);
-    if (suclick) {
-      divDaAttaccare.setAttribute("onClick", suclick);
-    }
-    let boxacuiattaccare = document.getElementById(idDestinazione);
-    boxacuiattaccare.appendChild(divDaAttaccare);
-    let divDaAttaccareI = document.getElementById(idDaAttaccare);
-    divDaAttaccareI.innerHTML += testo;
-  }
-  //permette di attaccare elementi diversi dai div
-  function attaccaX(idDaAttaccare, idDestinazione, css, testo, suclick, tipo) {
-    let divDaAttaccare = document.createElement(tipo);
-    css.map((item, index) => divDaAttaccare.classList.add(item));
-    divDaAttaccare.setAttribute("id", idDaAttaccare);
-    if (suclick) {
-      divDaAttaccare.setAttribute("onClick", suclick);
-    }
-    let boxacuiattaccare = document.getElementById(idDestinazione);
-    boxacuiattaccare.appendChild(divDaAttaccare);
-    let divDaAttaccareI = document.getElementById(idDaAttaccare);
-    divDaAttaccareI.innerHTML += testo;
-  }
-
-  // FUNZIONE CHE CI PERMETTE DI ORDINARE UN ARRAY DI OGGETTI DAL PIU GRANDE AL PIU PICCOLO SE SI VUOLE L ORDINE CONTRARIO INVERTIRE I SEGNI
-  function compare(a, b) {
-    // Use toUpperCase() to ignore character casing
-    const scoreA = a.punteggio;
-    const scoreB = b.punteggio;
-
-    let comparison = 0;
-    if (scoreA < scoreB) {
-      comparison = 1;
-    } else if (scoreA > scoreB) {
-      comparison = -1;
-    }
-    return comparison;
   }
 });

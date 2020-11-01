@@ -13,10 +13,10 @@ function azzerapunteggi() {
 }
 function aggiungipunteggiocoockie(utente, punteggio) {
   nuovo = utente + ":" + punteggio + ",";
-  console.log(nuovo);
+  //console.log(nuovo);
   setCookie("coockiememoria", getCookieName("coockiememoria") + nuovo, 7);
 
-  console.log("biscottino", getCookie("coockiememoria"));
+  //console.log("biscottino", getCookie("coockiememoria"));
 }
 // funzioni che ci permette di settare un COOKIE
 function getCookie(name) {
