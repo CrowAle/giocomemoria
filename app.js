@@ -42,9 +42,14 @@ async function visualizzaclassifica() {
   let biscotto = await getCookie("coockiememoria");
   visualizzapunteggiogenerale(biscotto, "locale");
 }
+function cambianomegenerale() {
+  let nuovonome = prompt("Setta il tuo nome per la classifica generale");
+  setCookie("nomexgenerale", nuovonome, 100);
+}
 function gestiscinome() {
   if (getCookieName("nomexgenerale")) {
-    if (
+    console.log("Nome Generale " + getCookieName("nomexgenerale"));
+    /*  if (
       !confirm(
         "Ciao " +
           getCookieName("nomexgenerale") +
@@ -55,7 +60,7 @@ function gestiscinome() {
       setCookie("nomexgenerale", nuovonome, 100);
     } else {
       console.log("tieni");
-    }
+    } */
   } else {
     let nuovonome = prompt("Setta il tuo nome per la classifica generale");
     setCookie("nomexgenerale", nuovonome, 100);
