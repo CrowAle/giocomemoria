@@ -3,7 +3,6 @@ function createCORSRequest(method, url) {
   if ("withCredentials" in xhr) {
     // XHR has 'withCredentials' property only if it supports CORS
     xhr.open(method, url, true);
-    console.log(1);
   } else if (typeof XDomainRequest != "undefined") {
     // if IE use XDR
     xhr = new XDomainRequest();

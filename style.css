@@ -52,7 +52,7 @@
     /* height: 50%; */
     opacity: 95%;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.5rem;
     border: solid 1px black;
   }
   .testo {
@@ -198,4 +198,27 @@
 }
 .btngenerale {
   background-color: rgb(238, 255, 0);
+}
+
+.closebtn {
+  display: flex;
+  font-family: sans-serif;
+  background-color: rgb(255, 0, 0);
+  color: white;
+  right: 0px;
+  font-size: 2rem;
+  height: 2.1rem;
+  width: 2.1rem;
+  justify-content: center;
+}
+.closebtn:hover {
+  cursor: pointer;
+  background-color: rgb(255, 108, 71);
+}
+.containclose {
+  display: flex;
+  width: 100%;
+
+  flex-direction: row;
+  justify-content: flex-end;
 }

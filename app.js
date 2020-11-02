@@ -1,8 +1,8 @@
 // FUNZIONE CHE CI PERMETTE DI ORDINARE UN ARRAY DI OGGETTI DAL PIU GRANDE AL PIU PICCOLO SE SI VUOLE L ORDINE CONTRARIO INVERTIRE I SEGNI
 function compare(a, b) {
   // Use toUpperCase() to ignore character casing
-  const scoreA = a.punteggio;
-  const scoreB = b.punteggio;
+  const scoreA = parseInt(a.punteggio);
+  const scoreB = parseInt(b.punteggio);
 
   let comparison = 0;
   if (scoreA < scoreB) {
@@ -38,6 +38,29 @@ function attaccaX(idDaAttaccare, idDestinazione, css, testo, suclick, tipo) {
   let divDaAttaccareI = document.getElementById(idDaAttaccare);
   divDaAttaccareI.innerHTML += testo;
 }
+async function visualizzaclassifica() {
+  let biscotto = await getCookie("coockiememoria");
+  visualizzapunteggiogenerale(biscotto, "locale");
+}
+function gestiscinome() {
+  if (getCookieName("nomexgenerale")) {
+    if (
+      !confirm(
+        "Ciao " +
+          getCookieName("nomexgenerale") +
+          " ! Questo è il nome per la classifica generale clicca OK per mantenere e Annulla per Cambiarlo!! Ps: potrai impostare quello locale dopo come al solito."
+      )
+    ) {
+      let nuovonome = prompt("Setta il tuo nome per la classifica generale");
+      setCookie("nomexgenerale", nuovonome, 100);
+    } else {
+      console.log("tieni");
+    }
+  } else {
+    let nuovonome = prompt("Setta il tuo nome per la classifica generale");
+    setCookie("nomexgenerale", nuovonome, 100);
+  }
+}
 async function get_class_assoluta() {
   var request = createCORSRequest(
     "get",
@@ -52,9 +75,8 @@ async function get_class_assoluta() {
     request.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         punteggio = JSON.parse(request.responseText);
-        console.log("qui", JSON.stringify(punteggio));
-        visualizzapunteggiogenerale(punteggio);
         //console.log("qui", JSON.stringify(punteggio));
+        visualizzapunteggiogenerale(punteggio, "generale");
       }
     };
   }
@@ -69,55 +91,66 @@ function destroy() {
   document.body.removeEventListener("click", destroy);
 }
 
-function visualizzapunteggiogenerale(arraypunteggio) {
-  let schermataFinale = document.createElement("div"); //schermatafinale
-  schermataFinale.setAttribute("id", "idschermatafinale");
-  document.body.appendChild(schermataFinale);
-  schermataFinale.classList.add("schermatafinale");
-  schermataFinale.classList.add("bgyellow");
-  document.body.addEventListener("click", destroy);
-  // document.body.addEventListener("click", destroy);
-
-  attacca(
-    "idpunteggio",
-    "idschermatafinale",
-    ["punteggio", "top", "titolo"],
-    "Classifica assoluta:",
-    ""
-  );
-  attacca(
-    "boxpunteggio",
-    "idpunteggio",
-    ["classifica", "boxbordato"],
-    "<table id='idtable'></table>",
-    ""
-  );
-  attacca("divazzera", "idschermatafinale", ["punteggio", "titolo"], "", "");
-
-  if (arraypunteggio.length > 0) {
-    arraypunteggio.sort(compare);
-    console.log(arraypunteggio);
-    arraypunteggio.map(
-      (item, index) => (
-        attaccaX("idriga" + index, "idtable", ["tra"], "", "", "tr"),
-        attaccaX(
-          "idnome" + index,
-          "idriga" + index,
-          ["tda", "classifica"],
-          item.nome,
-          "",
-          "td"
-        ),
-        attaccaX(
-          "idpunteggio" + index,
-          "idriga" + index,
-          ["tda", "classifica"],
-          item.punteggio,
-          "",
-          "td"
-        )
-      )
+function visualizzapunteggiogenerale(arraypunteggio, tipoclassifica) {
+  if (!document.getElementById("idschermatafinale")) {
+    let schermataFinale = document.createElement("div"); //schermatafinale
+    schermataFinale.setAttribute("id", "idschermatafinale");
+    document.body.appendChild(schermataFinale);
+    schermataFinale.classList.add("schermatafinale");
+    schermataFinale.classList.add("bgyellow");
+    //document.body.addEventListener("click", destroy);
+    attacca("idcontainclose", "idschermatafinale", ["containclose"], "", "");
+    attacca("idclose", "idcontainclose", ["closebtn"], "X", "destroy()");
+    attacca(
+      "idpunteggio",
+      "idschermatafinale",
+      ["punteggio", "top", "titolo"],
+      "Classifica " + tipoclassifica + ":",
+      ""
     );
+    attacca(
+      "boxpunteggio",
+      "idpunteggio",
+      ["classifica", "boxbordato"],
+      "<table id='idtable'></table>",
+      ""
+    );
+    attacca("divazzera", "idschermatafinale", ["punteggio", "titolo"], "", "");
+
+    if (tipoclassifica === "locale") {
+      attacca(
+        "idazzera",
+        "divazzera",
+        ["btn", "btnazzera"],
+        "Azzera Punteggi!",
+        "azzerapunteggi()"
+      );
+    }
+
+    if (arraypunteggio.length > 0) {
+      arraypunteggio.sort(compare);
+      arraypunteggio.map(
+        (item, index) => (
+          attaccaX("idriga" + index, "idtable", ["tra"], "", "", "tr"),
+          attaccaX(
+            "idnome" + index,
+            "idriga" + index,
+            ["tda", "classifica"],
+            item.nome,
+            "",
+            "td"
+          ),
+          attaccaX(
+            "idpunteggio" + index,
+            "idriga" + index,
+            ["tda", "classifica"],
+            item.punteggio,
+            "",
+            "td"
+          )
+        )
+      );
+    }
   }
 }
 document.addEventListener("DOMContentLoaded", () => {
@@ -292,6 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let giocoincorso = false;
   let counter;
 
+  gestiscinome();
   //FUNZIONE CHE DA IL VIA AL GIOCO
   function startgame() {
     //do alla variabile gioco in corso il true
@@ -373,6 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
     start.textContent = "Start";
     start.style.backgroundColor = "greenyellow";
   }
+
   function createBoard() {
     // costruisciarray();
     grid.innerHTML = "";
@@ -383,7 +418,6 @@ document.addEventListener("DOMContentLoaded", () => {
       card.classList.add("carte");
       card.addEventListener("click", flipCard);
       grid.appendChild(card);
-      console.log("eseguita");
     }
   }
   //QUESTA FUNZIONE DA UN LAMPO ROSSO IN CASO DI ERRORE E UN LAMPO VERDE IN CASO DI ACCOPPIAMENTO
@@ -440,8 +474,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let nome = "";
   let scoreboard = [
     { nome: "Alessio", punteggio: 20 },
-    { nome: "Alessio", punteggio: 7 },
-    { nome: "Mamma", punteggio: 40 },
+    { nome: "Luca", punteggio: 7 },
+    { nome: "Giuseppe", punteggio: 40 },
   ];
 
   function inseriscipunteggio(punteggio) {
@@ -452,8 +486,17 @@ document.addEventListener("DOMContentLoaded", () => {
     //let nuovopunteggio = { nome, punteggio };
     //scoreboard.push(nuovopunteggio);
     aggiungipunteggiocoockie(nome, punteggio);
-    inviapunteggiodb(nome, punteggio);
+
     scoreboard = getCookie("coockiememoria");
+    scoreboard.sort(compare);
+    if (scoreboard[1]) {
+      if (punteggio > parseInt(scoreboard[1].punteggio)) {
+        inviapunteggiodb(getCookieName("nomexgenerale"), punteggio);
+      }
+    }
+    if (!scoreboard[1] && punteggio > 30) {
+      inviapunteggiodb(getCookieName("nomexgenerale"), punteggio);
+    }
   }
 
   function visualizzapunteggio(arraypunteggio) {
@@ -488,7 +531,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     if (arraypunteggio.length > 0) {
       arraypunteggio.sort(compare);
-      console.log(arraypunteggio);
+      //console.log(arraypunteggio);
       arraypunteggio.map(
         (item, index) => (
           attaccaX("idriga" + index, "idtable", ["tra"], "", "", "tr"),
